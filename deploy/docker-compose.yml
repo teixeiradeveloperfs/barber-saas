@@ -1,0 +1,44 @@
+# Deploy simples: uma imagem com API + telas e um PostgreSQL.
+# Use a partir da raiz: docker compose -f deploy/docker-compose.yml up -d --build
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+        VITE_ADMIN_URL: ${VITE_ADMIN_URL}
+        VITE_LANDING_URL: ${VITE_LANDING_URL}
+        VITE_APP_NAME: ${VITE_APP_NAME:-Sua Barbearia}
+    env_file:
+      - .env.docker
+    ports:
+      - '7693:7693' # site do cliente
+      - '5928:5928' # painel administrativo
+      - '6400:6400' # landing page
+      - '7192:7192' # API
+    volumes:
+      - app-media:/data/media
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: barber
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: barber
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U barber -d barber']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  app-media:
+  postgres-data:

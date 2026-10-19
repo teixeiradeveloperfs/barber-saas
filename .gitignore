@@ -15,6 +15,7 @@ apps/*/.env.development
 .env.local
 .env.*.local
 .env.production
+deploy/.env.docker
 
 # logs
 logs/

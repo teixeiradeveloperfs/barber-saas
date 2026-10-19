@@ -139,41 +139,17 @@ O slug interno legado `barberos` pode aparecer em dados e URLs internas já exis
 
 ## Deploy em VPS
 
-O fluxo recomendado usa:
+O caminho recomendado para iniciantes é Docker Compose. Um único comando sobe a aplicação, a API e o PostgreSQL, sem exigir configuração manual de PM2, build separado ou GitHub Actions.
 
-- Nginx servindo os diretórios `dist` do cliente, admin e landing;
-- Nginx encaminhando `/api` para `127.0.0.1:7192`;
-- PM2 mantendo somente a API em execução;
-- PostgreSQL configurado conforme a infraestrutura da VPS.
-
-O passo a passo completo está em [deploy/README-VPS.md](deploy/README-VPS.md). O arquivo de exemplo do Nginx está em [deploy/nginx-vps.conf.example](deploy/nginx-vps.conf.example) e a configuração do PM2 em [deploy/ecosystem.config.cjs](deploy/ecosystem.config.cjs).
-
-Resumo do processo na VPS:
+O passo a passo está em [deploy/README-VPS.md](deploy/README-VPS.md). O arquivo de configuração é [deploy/docker-compose.yml](deploy/docker-compose.yml) e o modelo de variáveis está em [deploy/.env.docker.example](deploy/.env.docker.example).
 
 ```bash
-pnpm install --frozen-lockfile
-pnpm --filter @barber/backend prisma:deploy
-pnpm build
-pm2 start deploy/ecosystem.config.cjs --env production
-pm2 save
+cp deploy/.env.docker.example deploy/.env.docker
+# edite deploy/.env.docker e troque IP, senhas e segredos
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml up -d --build
 ```
 
-Depois, configure o domínio no Nginx, valide e recarregue:
-
-```bash
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
-Após uma atualização:
-
-```bash
-pnpm install --frozen-lockfile
-pnpm --filter @barber/backend prisma:deploy
-pnpm build
-pm2 restart sua-barbearia-api --update-env
-sudo nginx -t && sudo systemctl reload nginx
-```
+Nginx, PM2 e GitHub Actions ficam como opções avançadas para uma segunda etapa. O deploy básico não depende deles.
 
 ## Segurança
 

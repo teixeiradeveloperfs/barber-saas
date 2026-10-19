@@ -1,100 +1,122 @@
-# Deploy simples em VPS
+# Deploy simples com Docker
 
-Estrutura usada:
+Este é o caminho recomendado para quem está começando. Você não precisa configurar PM2, buildar cada aplicativo separadamente nem entender GitHub Actions.
 
-- Nginx serve os três `dist`: landing, site do cliente e admin.
-- PM2 mantém apenas a API NestJS na porta `7192`.
-- PostgreSQL deve estar acessível pela `DATABASE_URL` de produção.
+O Docker sobe tudo junto: site do cliente, painel administrativo, landing page, API e PostgreSQL.
 
-## 1. Dependências da VPS
+## 1. Instale Docker na VPS
+
+Em uma VPS Ubuntu, execute:
 
 ```bash
 sudo apt update
-sudo apt install -y nginx git curl
-sudo npm install -g pm2
+sudo apt install -y docker.io docker-compose-plugin git
+sudo systemctl enable --now docker
 ```
 
-Instale Node.js 22+ e pnpm 11+ na VPS. Depois clone o projeto:
+## 2. Baixe o projeto
 
 ```bash
-sudo mkdir -p /var/www
-sudo chown -R "$USER":"$USER" /var/www
-cd /var/www
-git clone URL_DO_SEU_REPOSITORIO sua-barbearia
-cd sua-barbearia
+cd /opt
+sudo git clone https://github.com/teixeiradeveloperfs/barber-saas.git sua-barbearia
+sudo chown -R "$USER":"$USER" /opt/sua-barbearia
+cd /opt/sua-barbearia
 ```
 
-## 2. Variáveis de produção
-
-Crie `apps/backend/.env.production` com, no mínimo:
-
-```env
-NODE_ENV=production
-PORT=7192
-DATABASE_URL=postgresql://usuario:senha@127.0.0.1:5432/sua_barbearia
-ADMIN_JWT_SECRET=troque-por-uma-chave-grande
-CUSTOMER_JWT_SECRET=troque-por-outra-chave-grande
-```
-
-Antes do build, configure a URL pública da API nos apps:
+## 3. Configure apenas um arquivo
 
 ```bash
-printf 'VITE_API_URL=https://api.seudominio.com.br\n' > apps/frontend/.env.production
-printf 'VITE_API_URL=https://api.seudominio.com.br\nVITE_FRONTEND_URL=https://app.seudominio.com.br\n' > apps/admin/.env.production
+cp deploy/.env.docker.example deploy/.env.docker
+nano deploy/.env.docker
 ```
 
-## 3. Build e banco
+Troque obrigatoriamente:
+
+- `SEU_IP_OU_DOMINIO` pelo IP ou domínio da VPS;
+- `POSTGRES_PASSWORD` pela senha do banco;
+- `ADMIN_JWT_SECRET` e `CUSTOMER_JWT_SECRET` por chaves longas;
+- `ADMIN_PASSWORD` pela senha do primeiro administrador.
+
+Se ainda não tiver domínio, use o IP da VPS. Exemplo: `http://203.0.113.10:7693`.
+
+## 4. Suba o sistema
+
+Ainda na raiz do projeto:
 
 ```bash
-corepack enable
-pnpm install --frozen-lockfile
-pnpm --filter @barber/backend prisma:deploy
-pnpm build
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml up -d --build
 ```
 
-## 4. Subir a API com PM2
+A primeira execução pode demorar alguns minutos, pois o Docker baixa as imagens e compila o sistema.
+
+## 5. Acesse
+
+Substitua `IP_DA_VPS` pelo IP real:
+
+- Cliente: `http://IP_DA_VPS:7693`
+- Admin: `http://IP_DA_VPS:5928`
+- Landing: `http://IP_DA_VPS:6400`
+- API: `http://IP_DA_VPS:7192`
+
+Abra no firewall da VPS as portas `7693`, `5928`, `6400` e `7192` se elas estiverem bloqueadas.
+
+## Comandos do dia a dia
+
+Ver se está rodando:
 
 ```bash
-pm2 start deploy/ecosystem.config.cjs --env production
-pm2 save
-pm2 startup
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml ps
 ```
 
-Execute o comando que o `pm2 startup` imprimir para o serviço subir novamente após reboot.
-
-## 5. Configurar o Nginx
+Ver os logs:
 
 ```bash
-sudo cp deploy/nginx-vps.conf.example /etc/nginx/sites-available/sua-barbearia.conf
-sudo sed -i 's/seudominio.com.br/seu-dominio-real.com.br/g' /etc/nginx/sites-available/sua-barbearia.conf
-sudo ln -s /etc/nginx/sites-available/sua-barbearia.conf /etc/nginx/sites-enabled/sua-barbearia.conf
-sudo nginx -t
-sudo systemctl reload nginx
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml logs -f app
 ```
 
-Configure no DNS os registros `@`, `www`, `app`, `admin` e `api` apontando para o IP da VPS. Depois ative HTTPS:
+Atualizar para a versão mais recente:
 
 ```bash
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d seu-dominio-real.com.br -d www.seu-dominio-real.com.br -d app.seu-dominio-real.com.br -d admin.seu-dominio-real.com.br -d api.seu-dominio-real.com.br
-```
-
-## Atualizar uma versão
-
-```bash
-cd /var/www/sua-barbearia
 git pull
-pnpm install --frozen-lockfile
-pnpm --filter @barber/backend prisma:deploy
-pnpm build
-pm2 restart sua-barbearia-api --update-env
-sudo nginx -t && sudo systemctl reload nginx
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml up -d --build
 ```
 
-Verificação rápida:
+Parar o sistema:
 
 ```bash
-pm2 status
-pm2 logs sua-barbearia-api --lines 100
-curl -I https://api.seu-dominio-real.com.br/
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml down
+```
+
+Os dados do PostgreSQL e os uploads ficam em volumes Docker e não são apagados pelo comando `down`.
+
+## Domínio e HTTPS
+
+Para o primeiro deploy, acesse pelas portas acima. Quando o sistema estiver funcionando, você pode colocar um domínio e HTTPS na frente dele usando um proxy como Cloudflare, Nginx Proxy Manager ou Nginx.
+
+Essa etapa é opcional e está documentada em [nginx-vps.conf.example](nginx-vps.conf.example). Ela não é necessária para entender ou testar o projeto.
+
+## Solução de problemas
+
+### O container não sobe
+
+```bash
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml logs app
+```
+
+Normalmente é algum valor incorreto no `deploy/.env.docker`, principalmente `DATABASE_URL` ou os segredos.
+
+### O site abre, mas não faz login
+
+Confira se `VITE_API_URL` aponta para o IP ou domínio da VPS, e não para `localhost`. Depois refaça o build:
+
+```bash
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml up -d --build
+```
+
+### Quero começar do zero
+
+O comando abaixo remove também o banco e os uploads. Use somente se aceitar perder os dados:
+
+```bash
+docker compose --env-file deploy/.env.docker -f deploy/docker-compose.yml down -v
 ```
