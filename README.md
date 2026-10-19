@@ -4,6 +4,16 @@ Sistema web para gestão de uma barbearia em instalação única, com área do c
 
 O projeto foi preparado para uso em curso e não possui fluxo de criação ou isolamento de múltiplos tenants. A instalação representa uma única barbearia.
 
+## Prévia
+
+Tela inicial do aplicativo do cliente em formato mobile:
+
+<p align="center">
+  <img src="docs/screenshots/client-home.png" alt="Tela inicial do Sua Barbearia em formato celular" width="320">
+</p>
+
+O aplicativo foi pensado para funcionar bem no celular, onde o cliente realiza o agendamento. As telas administrativas ficam disponíveis em uma aplicação separada para a equipe da barbearia.
+
 ## Visão geral
 
 - **Cliente:** agendamento, visualização de serviços, profissionais e horários.
