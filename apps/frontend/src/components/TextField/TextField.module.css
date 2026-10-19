@@ -1,0 +1,117 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-2);
+}
+
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  appearance: none;
+  transition:
+    border-color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+}
+
+.input::placeholder {
+  color: var(--text-4);
+}
+
+.input:hover {
+  border-color: rgba(var(--text-rgb), 0.16);
+}
+
+.input:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface-3);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
+  outline: none;
+}
+
+.control:has(.reveal) .input {
+  padding-right: 52px;
+}
+
+.reveal {
+  position: absolute;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.reveal:hover {
+  color: var(--text);
+  background: rgba(var(--text-rgb), 0.06);
+}
+
+.hint,
+.error {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hint {
+  color: var(--text-4);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.hasError .input {
+  border-color: var(--danger);
+}
+
+.hasError .input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(240, 165, 143, 0.2);
+}
+
+/* Autofill do Chrome pinta o campo de azul/amarelo; devolve as cores do tema. */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0 1000px var(--surface-2) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+/* iPhone amplia a tela ao focar campo com letra menor que 16px. */
+@media (pointer: coarse) {
+  .input {
+    font-size: 16px;
+  }
+}

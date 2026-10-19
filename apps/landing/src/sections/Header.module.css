@@ -1,0 +1,85 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 12px 0;
+}
+
+/* Pílula flutuante: fundo translúcido com blur, borda e raio total. */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 58px;
+  padding: 0 8px 0 18px;
+  border: 1px solid rgba(243, 238, 227, 0.12);
+  border-radius: 999px;
+  background: rgba(20, 20, 22, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px -30px rgba(0, 0, 0, 0.9);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+}
+
+.logo {
+  height: 22px;
+  width: auto;
+}
+
+.nav {
+  display: none;
+  gap: 28px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.nav a {
+  text-decoration: none;
+  transition: color 160ms var(--ease-out);
+}
+
+.nav a:hover {
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions .enter {
+  display: none;
+}
+
+@media (min-width: 560px) {
+  .actions .enter {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 960px) {
+  .inner {
+    height: 64px;
+    padding: 0 10px 0 24px;
+  }
+
+  .nav {
+    display: flex;
+  }
+}
+
+.nav a.partner {
+  color: var(--accent);
+}
+
+.nav a.partner:hover {
+  color: var(--accent-hi);
+}

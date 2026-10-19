@@ -1,0 +1,274 @@
+/* =========================================================
+   Primitivas da marca Sua Barbearia.
+   Componentes usam só os tokens semânticos abaixo.
+   ========================================================= */
+:root {
+  --ink: #0b0b0c;
+  --bone: #f3eee3;
+  --champagne: #e2d3a8;
+  --champagne-hi: #eee3c4;
+  --gold: #b3955a;
+  --cream: #f3efe6;
+
+  --font-sans:
+    'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  --gutter: 20px;
+  --container: 1200px;
+  --radius-card: 24px;
+  --radius-inner: 16px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Tema escuro: a página inteira, menos a seção "Como funciona". */
+  color-scheme: dark;
+  --bg: #0b0b0c;
+  --bg-2: #121214;
+  --surface-0: #18181b;
+  --surface-1: #1f1f23;
+  --surface-2: #2a2a2f;
+  --text: #f3eee3;
+  --text-rgb: 243, 238, 227;
+  --text-2: rgba(243, 238, 227, 0.74);
+  --text-3: rgba(243, 238, 227, 0.6);
+  --text-4: rgba(243, 238, 227, 0.42);
+  --line: rgba(243, 238, 227, 0.1);
+  --accent: #e2d3a8;
+  --accent-rgb: 226, 211, 168;
+  --accent-hi: #eee3c4;
+  --on-accent: #141312;
+  --pole-a: #e2d3a8;
+  --pole-b: #f3eee3;
+  --pole-c: #0b0b0c;
+  --shadow-rgb: 0, 0, 0;
+
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.light {
+  color-scheme: light;
+  --bg: #f3efe6;
+  --bg-2: #ebe5d8;
+  --surface-0: #fbf9f4;
+  --surface-1: #f3efe6;
+  --surface-2: #e9e3d6;
+  --text: #141312;
+  --text-rgb: 20, 19, 18;
+  --text-2: rgba(20, 19, 18, 0.74);
+  --text-3: rgba(20, 19, 18, 0.6);
+  --text-4: rgba(20, 19, 18, 0.45);
+  --line: rgba(20, 19, 18, 0.1);
+  --accent: #b3955a;
+  --accent-rgb: 179, 149, 90;
+  --accent-hi: #c9ad74;
+  --on-accent: #141312;
+  --pole-a: #b3955a;
+  --pole-b: #141312;
+  --pole-c: #f3efe6;
+  --shadow-rgb: 60, 50, 30;
+  background: var(--bg);
+  color: var(--text);
+}
+
+@media (min-width: 900px) {
+  :root {
+    --gutter: clamp(32px, 5vw, 80px);
+  }
+}
+
+/* ---------- base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.35);
+}
+
+/* ---------- utilidades ---------- */
+.container {
+  width: min(var(--container), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(72px, 9vw, 128px);
+}
+
+.eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.h2 {
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.1rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.h2 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.06em;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+/* botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 24px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btnPrimary:hover {
+  background: var(--accent-hi);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--text);
+  border-color: rgba(var(--text-rgb), 0.18);
+}
+
+.btnGhost:hover {
+  background: rgba(var(--text-rgb), 0.06);
+  border-color: rgba(var(--text-rgb), 0.3);
+}
+
+.btnSm {
+  height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* revelar ao rolar */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 720ms var(--ease-out),
+    transform 720ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

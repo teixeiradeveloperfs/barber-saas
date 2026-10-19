@@ -1,0 +1,197 @@
+.page {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: max(20px, env(safe-area-inset-top)) var(--gutter) 32px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.head > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.filterButton {
+  width: 48px;
+  height: 48px;
+  font-size: 19px;
+}
+
+.active {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.activeChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 8px 0 12px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+  cursor: pointer;
+}
+
+.activeChip svg {
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.activeChip:hover svg {
+  opacity: 1;
+}
+
+.clearAll {
+  border: 0;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.clearAll:hover {
+  color: var(--text);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px dashed rgba(var(--text-rgb), 0.16);
+  color: var(--text-3);
+}
+
+.empty p {
+  margin: 0;
+  font-size: 15px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.picked {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  background: rgba(var(--accent-rgb), 0.1);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.pickedIcon {
+  flex: none;
+  font-size: 18px;
+  color: var(--accent);
+  transform: rotate(-45deg);
+}
+
+.pickedText {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+.pickedText strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.pickedMeta {
+  color: var(--text-3);
+}
+
+.pickedChange {
+  flex: none;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.pickedChange:hover {
+  color: var(--text);
+}
+
+.pickedClear {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-3);
+  font-size: 18px;
+}
+
+.pickedClear:hover {
+  color: var(--text);
+  background: rgba(var(--text-rgb), 0.06);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .page {
+    padding: 40px var(--gutter-desktop) 48px;
+  }
+
+  .head {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: clamp(36px, 3.4vw, 44px);
+    letter-spacing: -0.02em;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

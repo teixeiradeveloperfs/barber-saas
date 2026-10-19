@@ -1,0 +1,266 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back svg {
+  width: 16px;
+  height: 16px;
+}
+
+.titleRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar,
+.avatarFallback {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex: none;
+}
+
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.titleText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subtitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--text-3);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dayNav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dateField {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 170px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.dateField input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dayLabel {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.summary strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.closedBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: var(--text-2);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  min-height: 48px;
+}
+
+.row + .row {
+  border-top: 1px solid var(--line);
+}
+
+.time {
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+  align-self: start;
+  line-height: 48px;
+}
+
+.cell {
+  min-width: 0;
+  padding: 6px 12px 6px 0;
+}
+
+.row_atendimento .cell {
+  padding: 8px 10px 8px 0;
+}
+
+.row_passou {
+  background: var(--surface-0);
+}
+
+.row_passou .time,
+.row_continua .time {
+  color: var(--text-4);
+}
+
+.row_bloqueio {
+  background: repeating-linear-gradient(135deg, transparent 0 8px, rgba(var(--text-rgb), 0.03) 8px 16px);
+}
+
+.faint {
+  font-size: 13px;
+  color: var(--text-4);
+}
+
+.freeCell,
+.blockCell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.free {
+  font-size: 13px;
+  color: var(--success);
+}
+
+.blockText {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.muted {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.muted a {
+  color: var(--text-2);
+}
+
+.dialogBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+
+  .time {
+    padding: 0 20px;
+  }
+}
+
+.blocks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.blockItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.blockTime {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.blockWho {
+  color: var(--text-2);
+}
+
+.blockReason {
+  color: var(--text-3);
+  flex: 1;
+}

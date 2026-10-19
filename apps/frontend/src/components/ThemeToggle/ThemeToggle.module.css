@@ -1,0 +1,36 @@
+.toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  font-size: 22px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.toggle:hover {
+  background: var(--surface-1);
+}
+
+/* Os dois ícones ficam sobrepostos; o inativo gira e some. */
+.icon {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: rotate(-60deg) scale(0.7);
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 320ms var(--ease-out);
+}
+
+.icon[data-active] {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}

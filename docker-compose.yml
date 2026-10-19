@@ -1,0 +1,39 @@
+# Infra local de desenvolvimento. Sobe com `docker compose up -d`.
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: barber-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: barber
+      POSTGRES_PASSWORD: barber
+      POSTGRES_DB: barber_dev
+    ports:
+      - '5544:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U barber -d barber_dev']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # WhatsApp (WAHA com motor GOWS/whatsmeow). Mac com Apple Silicon:
+  # WAHA_TAG=gows-arm-2026.8.2 docker compose up -d
+  waha:
+    image: devlikeapro/waha:${WAHA_TAG:-gows-2026.8.2}
+    container_name: barber-waha
+    restart: unless-stopped
+    environment:
+      WAHA_API_KEY: dev-waha-chave-7300
+      WHATSAPP_DEFAULT_ENGINE: GOWS
+      WAHA_PRINT_QR: 'false'
+      WAHA_WORKER_RESTART_SESSIONS: 'true'
+    ports:
+      - '7300:3000'
+    volumes:
+      - waha-sessions:/app/.sessions
+
+volumes:
+  postgres-data:
+  waha-sessions:

@@ -1,0 +1,8 @@
+.screen {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  background: var(--bg);
+  /* Sem overflow aqui: um ancestral com overflow != visible vira o container
+     de rolagem dos elementos sticky (sidebar) e quebra o comportamento. */
+}

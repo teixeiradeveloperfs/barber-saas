@@ -1,0 +1,154 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100dvh;
+}
+
+.panel {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  /* Painel de marca: fica escuro nos dois temas, como overlay sobre foto. */
+  background: var(--ink);
+  color: var(--bone);
+  overflow: hidden;
+}
+
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -30% auto;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.mark {
+  display: block;
+  align-self: flex-start;
+  height: 34px;
+  width: auto;
+  color: var(--bone);
+}
+
+.panelText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 34ch;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--champagne);
+}
+
+.headline {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.sub {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(243, 238, 227, 0.68);
+}
+
+.formSide {
+  display: flex;
+  flex-direction: column;
+  padding: 16px var(--gutter) 40px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: block;
+  height: 24px;
+  width: auto;
+  color: var(--text);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 400px);
+  margin: auto;
+  padding-top: 32px;
+}
+
+.formHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.error {
+  margin: -4px 0 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+@media (min-width: 900px) {
+  .page {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+
+  .panel {
+    display: flex;
+  }
+
+  .formSide {
+    padding: 24px 48px 48px;
+  }
+
+  /* No desktop a marca já está no painel; mantém o espaço para o toggle ficar à direita. */
+  .brand {
+    visibility: hidden;
+  }
+}
+
+.linkButton {
+  align-self: center;
+  padding: 6px 8px;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.linkButton:hover {
+  color: var(--accent);
+}

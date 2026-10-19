@@ -1,0 +1,50 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+build/
+
+# env
+# Arquivos de ambiente locais nunca entram no repositório; use os exemplos.
+*.env.development
+apps/*/.env.development
+# .env.production e *.local ficam fora do git.
+.env
+.env.local
+.env.*.local
+.env.production
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# tests
+coverage/
+
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.local
+
+# typescript
+*.tsbuildinfo
+
+# turborepo
+.turbo/
+
+# worktrees locais do Claude Code
+.claude/worktrees/
+
+# prisma client gerado
+apps/backend/src/generated/
+
+# uploads do banco de imagens (dev)
+apps/backend/storage/

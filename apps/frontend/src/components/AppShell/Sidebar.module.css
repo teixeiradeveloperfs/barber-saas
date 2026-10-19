@@ -1,0 +1,221 @@
+.sidebar {
+  --sidebar-w: 256px;
+  --pad: 16px;
+
+  display: none;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  width: var(--sidebar-w);
+  flex-direction: column;
+  padding: 24px var(--pad) max(20px, env(safe-area-inset-bottom));
+  background: var(--surface-nav);
+  border-right: 1px solid var(--line);
+  transition: width 240ms var(--ease-out);
+  overflow: hidden;
+}
+
+.collapsed {
+  --sidebar-w: 80px;
+}
+
+/* ---------- logo ---------- */
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  margin-bottom: 28px;
+  white-space: nowrap;
+}
+
+/* Recolhido: só a tesoura fica. */
+.collapsed .logo {
+  justify-content: center;
+  padding: 0;
+}
+
+.collapsed .logo span {
+  display: none;
+}
+
+/* ---------- navegação ---------- */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: var(--text-3);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.item:hover {
+  color: var(--text);
+  background: rgba(var(--text-rgb), 0.05);
+}
+
+.active,
+.active:hover {
+  color: var(--text);
+  background: rgba(var(--accent-rgb), 0.12);
+}
+
+.active .icon {
+  color: var(--accent);
+}
+
+/* Indicador encostado na borda esquerda da sidebar. */
+.active::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--pad));
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent);
+}
+
+.icon {
+  flex: none;
+  font-size: 22px;
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.collapsed .item {
+  justify-content: center;
+  padding: 0;
+}
+
+.collapsed .label {
+  display: none;
+}
+
+/* ---------- rodapé ---------- */
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 14px;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.user:hover {
+  background: rgba(var(--text-rgb), 0.05);
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userHint {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+.collapsed .user {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.collapsed .userText {
+  display: none;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.collapsed .tools {
+  flex-direction: column;
+  padding: 0;
+}
+
+.tool {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 22px;
+  cursor: pointer;
+  transition:
+    color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.tool:hover {
+  color: var(--text);
+  background: rgba(var(--text-rgb), 0.06);
+}
+
+.collapse {
+  margin-left: auto;
+}
+
+.collapse svg {
+  transition: transform 240ms var(--ease-out);
+}
+
+.collapsed .collapse {
+  margin-left: 0;
+}
+
+.collapsed .collapse svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .sidebar {
+    display: flex;
+  }
+}

@@ -1,0 +1,429 @@
+.page {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: max(20px, env(safe-area-inset-top)) var(--gutter) 32px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow svg {
+  font-size: 15px;
+}
+
+.eyebrowSmall {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.notice strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- proposta (avulso) ---------- */
+
+.perks {
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.perk > svg {
+  flex: none;
+  margin-top: 2px;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.perk > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.perkTitle {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.perkText {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.planHighlight {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(var(--accent-rgb), 0.18), transparent 70%),
+    var(--surface-1);
+}
+
+.planTagline {
+  margin: -6px 0 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.footnote {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.footnote strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.cancelLink {
+  align-self: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-4);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cancelLink:hover {
+  color: var(--danger);
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- plano atual ---------- */
+
+.current {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(var(--accent-rgb), 0.2), transparent 70%),
+    var(--surface-1);
+}
+
+.currentTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.renewals {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.planName {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  margin: -6px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.price span {
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.facts > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.facts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+
+.facts dt {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+.facts dd {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.factHint {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+.includes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.includes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.includes svg {
+  flex: none;
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.renewBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(var(--accent-rgb), 0.12);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.renewBox p {
+  margin: 0;
+}
+
+.renewBox strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.renewIcon {
+  flex: none;
+  margin-top: 2px;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+/* ---------- outros planos ---------- */
+
+.sectionTitle {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.planGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.planCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 20px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.planCurrent {
+  border-color: rgba(var(--accent-rgb), 0.35);
+}
+
+.planCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.planCardName {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.planCardPrice {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.planCardPrice span {
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.planCardList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+  flex: 1;
+}
+
+.planCardList li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.planCardList li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- tablet ---------- */
+
+@media (min-width: 560px) {
+  .planGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .perks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .page {
+    padding: 40px var(--gutter-desktop) 48px;
+  }
+
+  .title {
+    font-size: clamp(36px, 3.4vw, 44px);
+    letter-spacing: -0.02em;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .current {
+    position: sticky;
+    top: 28px;
+    padding: 26px 24px;
+  }
+
+  .perks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

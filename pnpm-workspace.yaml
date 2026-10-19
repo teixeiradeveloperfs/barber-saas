@@ -1,0 +1,12 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Dependências com scripts de instalação aprovados. pnpm bloqueia por padrão.
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  prisma: true
+  esbuild: true
+  msgpackr-extract: false
+  workerd: false

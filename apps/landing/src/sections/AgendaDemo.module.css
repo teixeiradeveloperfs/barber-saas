@@ -1,0 +1,204 @@
+.board {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface-0);
+  box-shadow: 0 40px 80px -60px rgba(var(--shadow-rgb), 0.9);
+}
+
+/* No celular a terceira coluna sai do fluxo (display: none), então o template tem só duas. */
+.grid {
+  display: grid;
+  grid-template-columns: 52px repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.corner {
+  height: 40px;
+}
+
+.barber {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(var(--accent-rgb), 0.18);
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-4);
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+  height: 48px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.25;
+  text-align: left;
+  color: var(--text-2);
+  transition:
+    background 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+
+.cell strong,
+.cell span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cell strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.livre {
+  border-style: dashed;
+  border-color: rgba(var(--text-rgb), 0.18);
+  color: var(--text-3);
+  background: transparent;
+  cursor: pointer;
+}
+
+.livre:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.reservado {
+  background: var(--surface-2);
+  border-color: transparent;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.mine {
+  cursor: pointer;
+  background: rgba(var(--accent-rgb), 0.16);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.mine:hover {
+  background: rgba(var(--accent-rgb), 0.22);
+}
+
+.continua {
+  background: var(--surface-2);
+  opacity: 0.55;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.bloqueado {
+  color: var(--text-3);
+  background: repeating-linear-gradient(-38deg, rgba(var(--text-rgb), 0.06) 0 6px, transparent 6px 12px);
+  border-color: var(--line);
+}
+
+.passou {
+  color: var(--text-4);
+  background: rgba(var(--text-rgb), 0.03);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--text-3);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.swatch_livre {
+  border: 1px dashed rgba(var(--text-rgb), 0.3);
+}
+
+.swatch_reservado {
+  background: var(--surface-2);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.swatch_bloqueado {
+  background: repeating-linear-gradient(-38deg, rgba(var(--text-rgb), 0.12) 0 3px, transparent 3px 6px);
+  border-color: var(--line);
+}
+
+.swatch_passou {
+  background: rgba(var(--text-rgb), 0.05);
+}
+
+.thirdCol {
+  display: none;
+}
+
+@media (min-width: 520px) {
+  .grid {
+    grid-template-columns: 52px repeat(var(--cols), minmax(0, 1fr));
+  }
+
+  .thirdCol {
+    display: flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .board {
+    padding: 22px;
+  }
+
+  .grid {
+    grid-template-columns: 64px repeat(var(--cols), minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .cell {
+    height: 52px;
+    padding: 0 14px;
+    font-size: 13.5px;
+  }
+
+  .time {
+    height: 52px;
+    font-size: 13px;
+  }
+}

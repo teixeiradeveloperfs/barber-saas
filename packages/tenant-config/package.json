@@ -1,0 +1,31 @@
+{
+  "name": "@barber/tenant-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Schema e tipos da configuração de um tenant (barbearia). Compartilhado por frontend, admin e backend.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "lint": "oxlint src/",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "oxlint": "^1.58.0",
+    "typescript": "^6.0.2"
+  },
+  "files": [
+    "dist"
+  ]
+}

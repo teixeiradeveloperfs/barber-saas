@@ -1,0 +1,87 @@
+.footer {
+  padding: 48px 0 32px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+}
+
+.logo {
+  align-self: flex-start;
+  height: 22px;
+  width: auto;
+  color: var(--text);
+}
+
+.tagline {
+  font-size: 14.5px;
+  color: var(--text-3);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.links a {
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text-4);
+}
+
+@media (min-width: 800px) {
+  .inner {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.tagline a {
+  color: var(--text-2);
+  text-underline-offset: 3px;
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.legal a {
+  color: var(--text-3);
+  text-decoration: none;
+}
+
+.legal a:hover {
+  color: var(--text);
+}

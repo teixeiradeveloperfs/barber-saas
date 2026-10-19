@@ -1,0 +1,167 @@
+.hero {
+  position: relative;
+  padding: clamp(28px, 6vw, 84px) 0 clamp(56px, 7vw, 104px);
+  overflow: clip;
+  background:
+    radial-gradient(56% 48% at 82% 8%, rgba(var(--accent-rgb), 0.12), transparent 62%),
+    radial-gradient(40% 40% at 10% 90%, rgba(var(--accent-rgb), 0.05), transparent 60%);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.title {
+  font-size: clamp(2.55rem, 1.4rem + 5.2vw, 4.7rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.06em;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-3);
+}
+
+.proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.proof li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.poleDesktop {
+  display: none;
+}
+
+.poleMobile {
+  width: 120px;
+  margin: 0 auto 28px;
+}
+
+.visual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.panel {
+  display: none;
+}
+
+.phone {
+  width: min(72%, 300px);
+  padding: 9px;
+  border-radius: 40px;
+  background: #16161a;
+  border: 1px solid rgba(243, 238, 227, 0.14);
+  box-shadow:
+    0 60px 100px -40px rgba(0, 0, 0, 0.95),
+    0 20px 40px -24px rgba(0, 0, 0, 0.8);
+}
+
+.phone img {
+  width: 100%;
+  border-radius: 32px;
+}
+
+/* entrada */
+.rise {
+  animation: rise 900ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.02fr) 16px minmax(0, 0.98fr);
+    gap: clamp(28px, 4vw, 64px);
+  }
+
+  .poleDesktop {
+    display: block;
+    align-self: stretch;
+    min-height: 420px;
+  }
+
+  .poleMobile {
+    display: none;
+  }
+
+  .visual {
+    display: block;
+    min-height: 560px;
+  }
+
+  .panel {
+    display: block;
+    position: absolute;
+    top: 2%;
+    right: -8%;
+    width: 88%;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(243, 238, 227, 0.12);
+    background: #141416;
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.9);
+    transform: rotate(1.2deg);
+  }
+
+  .phone {
+    position: absolute;
+    left: -2%;
+    bottom: 0;
+    width: 43%;
+    max-width: 260px;
+  }
+}

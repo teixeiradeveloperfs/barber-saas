@@ -1,0 +1,16 @@
+.git
+.github
+.turbo
+.claude
+**/node_modules
+**/dist
+**/.turbo
+**/*.tsbuildinfo
+# segredos e dados locais nunca entram na imagem
+**/.env
+**/.env.production
+**/.env.*.local
+**/*.local
+apps/backend/storage
+apps/backend/src/generated
+brand/barberos/estudos

@@ -1,0 +1,106 @@
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 6px max(6px, env(safe-area-inset-right)) max(6px, env(safe-area-inset-bottom))
+    max(6px, env(safe-area-inset-left));
+  background: color-mix(in srgb, var(--surface-nav) 90%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -10px 32px -14px rgba(var(--shadow-rgb), 0.45);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0 6px;
+  border-radius: 12px;
+  color: var(--text-4);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 160ms var(--ease-out);
+}
+
+.item:active {
+  background: rgba(var(--text-rgb), 0.05);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  line-height: 0;
+  transition: transform 220ms var(--ease-out);
+}
+
+.active {
+  color: var(--accent);
+}
+
+.active .icon svg {
+  stroke-width: 2;
+}
+
+.active .icon {
+  transform: translateY(-1px);
+}
+
+/* ---------- item em destaque (Agenda): botão champagne elevado ---------- */
+
+.featured .icon {
+  width: 54px;
+  height: 54px;
+  margin-top: -30px;
+  border-radius: 50%;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi) 0%, var(--accent-lo) 100%);
+  /* Anel na cor da barra recorta o círculo na borda superior. */
+  box-shadow:
+    0 0 0 5px var(--surface-nav),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 10px 24px -10px rgba(var(--accent-rgb), 0.7);
+  transition:
+    transform 220ms var(--ease-out),
+    box-shadow 220ms var(--ease-out);
+}
+
+.featured .icon svg {
+  stroke-width: 1.9;
+}
+
+.featured:active .icon {
+  transform: scale(0.96);
+}
+
+.featured.active .icon {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 5px var(--surface-nav),
+    0 0 0 7px rgba(var(--accent-rgb), 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 14px 28px -10px rgba(var(--accent-rgb), 0.8);
+}
+
+.featured .label {
+  margin-top: 2px;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .nav {
+    display: none;
+  }
+}

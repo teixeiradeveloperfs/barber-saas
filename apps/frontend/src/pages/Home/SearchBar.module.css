@@ -1,0 +1,260 @@
+.root {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field input {
+  width: 100%;
+  height: 56px;
+  padding: 0 52px 0 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  transition:
+    border-color 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+  appearance: none;
+}
+
+.field input::placeholder {
+  color: var(--text-4);
+}
+
+.field input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.field input:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface-3);
+}
+
+.icon {
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.clearButton {
+  position: absolute;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  color: var(--text);
+  background: rgba(var(--text-rgb), 0.06);
+}
+
+/* ---------- painel ---------- */
+
+.panel {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  max-height: min(60vh, 520px);
+  overflow: auto;
+  padding: 6px 0;
+  border-radius: 20px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 70px -30px rgba(var(--shadow-rgb), 0.6);
+  animation: pop 180ms var(--ease-out) both;
+}
+
+.group + .group {
+  border-top: 1px solid var(--line);
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px 4px;
+}
+
+.groupTitle {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.groupAction {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.groupAction:hover {
+  color: var(--text);
+}
+
+.list {
+  margin: 0;
+  padding: 2px 8px 8px;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms var(--ease-out);
+}
+
+.row:hover,
+.row:focus-visible {
+  background: rgba(var(--text-rgb), 0.05);
+}
+
+.rowIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--surface-2);
+  color: var(--accent);
+  font-size: 17px;
+}
+
+.scissors {
+  transform: rotate(-45deg);
+}
+
+.rowText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rowTitle {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rowHint {
+  font-size: 12px;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowMeta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+.star {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 18px 14px;
+}
+
+.chip {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 140ms var(--ease-out);
+}
+
+.chip:hover {
+  color: var(--text);
+  background: var(--surface-3);
+}
+
+.empty {
+  margin: 0;
+  padding: 14px 18px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.empty strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* iPhone amplia a tela ao focar campo com letra menor que 16px. */
+@media (pointer: coarse) {
+  .field input {
+    font-size: 16px;
+  }
+}

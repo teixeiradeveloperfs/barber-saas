@@ -1,0 +1,88 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.box {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border: 1px solid rgba(var(--text-rgb), 0.28);
+  border-radius: 7px;
+  background: var(--surface-2);
+  color: var(--on-accent);
+  transition:
+    background-color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+}
+
+.check {
+  font-size: 14px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity 140ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.input:checked + .box {
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.input:checked + .box .check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input:focus-visible + .box {
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.28);
+}
+
+.boxError {
+  border-color: var(--danger);
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.text a {
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 160ms var(--ease-out);
+}
+
+.text a:hover {
+  color: var(--text);
+}
+
+.error {
+  margin: 0;
+  padding-left: 34px;
+  font-size: 13px;
+  color: var(--danger);
+}

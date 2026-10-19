@@ -1,0 +1,206 @@
+.auth {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--surface-0);
+  color: var(--text);
+}
+
+/* ---------- painel de marca (desktop) ---------- */
+
+.panel {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(28px, 3.2vw, 52px) clamp(32px, 4vw, 64px);
+  /* Sempre escuro: é foto, não superfície de tema. */
+  background:
+    radial-gradient(58% 42% at 80% 18%, rgba(226, 211, 168, 0.22), transparent 72%),
+    #141416;
+  color: #f3eee3;
+}
+
+.panelPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.panelPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 30%;
+}
+
+.panelPhoto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11, 11, 12, 0.94) 0%,
+    rgba(11, 11, 12, 0.5) 40%,
+    rgba(11, 11, 12, 0.12) 70%,
+    rgba(11, 11, 12, 0.4) 100%
+  );
+}
+
+.panelLogo {
+  /* O Logo usa tokens de tema; aqui força as cores da foto. */
+  --text: #f3eee3;
+  --accent: #e2d3a8;
+}
+
+.panelClaim {
+  margin: auto 0 0;
+  max-width: 14ch;
+  font-size: clamp(30px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ---------- coluna do formulário ---------- */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  /* --keyboard-inset: altura do teclado no iOS, que não encolhe a página.
+     Sobra espaço embaixo para rolar até o botão com o teclado aberto. */
+  padding: max(12px, env(safe-area-inset-top)) var(--gutter)
+    calc(max(20px, env(safe-area-inset-bottom)) + var(--keyboard-inset, 0px));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+}
+
+.content {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  animation: rise var(--dur) var(--ease-out) both;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-3);
+  transition: color 160ms var(--ease-out);
+}
+
+.back:hover {
+  color: var(--text);
+}
+
+.back svg {
+  font-size: 18px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.body {
+  margin-top: 22px;
+}
+
+.footer {
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto 0;
+  padding-top: 4px;
+  font-size: 14px;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 160ms var(--ease-out);
+}
+
+.footer a:hover {
+  color: var(--text);
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .auth {
+    grid-template-columns: minmax(360px, 42%) minmax(0, 1fr);
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main {
+    padding: clamp(24px, 3vw, 40px) var(--gutter-desktop);
+  }
+
+  .body {
+    margin-top: 28px;
+  }
+
+  /* Logo já está no painel; a barra fica só com o toggle. */
+  .brand {
+    visibility: hidden;
+  }
+
+  .content {
+    margin: auto;
+    padding-top: 0;
+  }
+
+  .footer {
+    margin-top: 0;
+    margin-bottom: auto;
+    padding-top: 28px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

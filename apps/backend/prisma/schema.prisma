@@ -1,0 +1,477 @@
+// Schema da instalação única do BarberOS.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TenantStatus {
+  ATIVO
+  SUSPENSO
+  ENCERRADO
+}
+
+model Installation {
+  id        String       @id @default(cuid())
+  slug      String       @unique
+  name      String
+  status    TenantStatus @default(ATIVO)
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+
+
+  @@map("tenants")
+}
+
+/// Cliente do app de uma barbearia. Entra com e-mail + senha; WhatsApp é opcional (código por SMS/WhatsApp fica pronto para depois).
+model Customer {
+  id              String    @id @default(cuid())
+  name            String
+  /// Só dígitos com DDI, ex.: 5511987654321. Opcional: usado para confirmações e reservas.
+  phone           String?
+  /// Login. Único por barbearia.
+  email           String?
+  passwordHash    String?   @map("password_hash")
+  phoneVerifiedAt DateTime? @map("phone_verified_at")
+  lastLoginAt     DateTime? @map("last_login_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  /// Código do link de indicação (único por barbearia)
+  referralCode    String?   @map("referral_code")
+
+  appointments Appointment[]
+  referralsMade     CustomerReferral[] @relation("referrer")
+  referredBy        CustomerReferral?  @relation("referred")
+  rewards           CustomerReward[]
+
+  @@unique([phone])
+  @@unique([email])
+  @@unique([referralCode])
+  @@map("customers")
+}
+
+enum OtpChannel {
+  SMS
+  WHATSAPP
+}
+
+enum OtpPurpose {
+  CADASTRO
+  LOGIN
+  RECUPERACAO
+}
+
+/// Código de uso único enviado por SMS ou WhatsApp. Guarda só o hash.
+model OtpCode {
+  id         String     @id @default(cuid())
+  phone      String
+  channel    OtpChannel
+  purpose    OtpPurpose
+  codeHash   String     @map("code_hash")
+  expiresAt  DateTime   @map("expires_at")
+  attempts   Int        @default(0)
+  consumedAt DateTime?  @map("consumed_at")
+  createdAt  DateTime   @default(now()) @map("created_at")
+
+  @@index([phone, purpose, createdAt])
+  @@map("otp_codes")
+}
+
+/// Equipe da barbearia. Fonte única: o app recebe estes dados no lugar de `config.barbers`.
+model Barber {
+  id       String  @id @default(cuid())
+  /// Id estável usado no app, nos agendamentos e nos vínculos de acesso (`barbers[].id` do config)
+  slug     String
+  name     String
+  tier     String?
+  rating   Decimal @default(5.0) @db.Decimal(2, 1)
+  reviews  Int     @default(0)
+  specialties        String[] @default([])
+  nextAvailableLabel String   @default("Hoje") @map("next_available_label")
+  nextAvailableToday Boolean  @default(true) @map("next_available_today")
+  image    String  @default("")
+  /// Afastado ou desligado: some do app e não recebe reservas, histórico fica
+  active   Boolean @default(true)
+  position Int     @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([slug])
+  @@index([position])
+  @@map("barbers")
+}
+
+enum AppointmentStatus {
+  /// Legado: reserva esperando a barbearia confirmar. Hoje toda reserva nasce CONFIRMADO.
+  MARCADO
+  /// Horário reservado (a reserva já vale, sem etapa de confirmação)
+  CONFIRMADO
+  /// Cliente compareceu e foi atendido
+  CONCLUIDO
+  /// Cliente não apareceu
+  FALTOU
+  CANCELADO
+}
+
+enum AppointmentSource {
+  APP
+  PAINEL
+}
+
+/// Reserva de horário. Barbeiro e serviços apontam para ids do config publicado.
+model Appointment {
+  id                String            @id @default(cuid())
+  barberId          String            @map("barber_id")
+  serviceIds        String[]          @map("service_ids")
+  coveredServiceIds String[]          @default([]) @map("covered_service_ids")
+  customerName      String            @map("customer_name")
+  /// Só dígitos com DDI, ex.: 5511987654321
+  customerPhone     String            @map("customer_phone")
+  /// Conta do cliente, quando a reserva foi feita logado (ou vinculada depois pelo telefone)
+  customerId        String?           @map("customer_id")
+  startsAt          DateTime          @map("starts_at")
+  endsAt            DateTime          @map("ends_at")
+  durationMin       Int               @map("duration_min")
+  /// Valor a pagar no dia, já sem o que o Clube cobre
+  total             Decimal           @db.Decimal(10, 2)
+  status            AppointmentStatus @default(CONFIRMADO)
+  source            AppointmentSource @default(APP)
+  notes             String?
+  /// Código que o cliente usa para consultar e cancelar sem login
+  cancelCode        String            @unique @map("cancel_code")
+  cancelledAt       DateTime?         @map("cancelled_at")
+  /// Lembrete por WhatsApp já enviado (ou dispensado)
+  reminderSentAt    DateTime?         @map("reminder_sent_at")
+  /// Cliente respondeu ao lembrete confirmando que vai
+  customerConfirmedAt DateTime?       @map("customer_confirmed_at")
+  /// Desconto de recompensa (indicação) já abatido do total
+  discount          Decimal           @default(0) @db.Decimal(10, 2)
+  /// Recompensa usada neste agendamento
+  rewardLabel       String?           @map("reward_label")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  @@index([startsAt])
+  @@index([barberId, startsAt])
+  @@index([customerPhone])
+  @@index([customerId])
+  @@map("appointments")
+}
+
+/// Período sem atendimento: folga, almoço, feriado. Sem barbeiro = barbearia inteira.
+model AgendaBlock {
+  id        String   @id @default(cuid())
+  barberId  String?  @map("barber_id")
+  startsAt  DateTime @map("starts_at")
+  endsAt    DateTime @map("ends_at")
+  reason    String?
+  createdBy String?  @map("created_by")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([startsAt])
+  @@map("agenda_blocks")
+}
+
+/// Agenda do barbeiro aberta ou trancada para novas reservas.
+model BarberAgenda {
+  barberId     String   @map("barber_id")
+  open         Boolean  @default(true)
+  closedReason String?  @map("closed_reason")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@id([barberId])
+  @@map("barber_agendas")
+}
+
+/// Ajustes globais da plataforma. Linha única, id fixo "platform".
+model PlatformSettings {
+  id String @id @default("platform")
+  /// Barbearia que responde no domínio da própria plataforma (ex.: localhost, app.plataforma.com).
+  /// Nula: o app mostra a tela de endereço não configurado.
+  /// Site da plataforma (landing): contato e tracking. Só quem opera a plataforma edita.
+  landingWhatsapp     String? @map("landing_whatsapp")
+  landingDemoUrl      String? @map("landing_demo_url")
+  metaPixelId         String? @map("meta_pixel_id")
+  googleTagId         String? @map("google_tag_id")
+  googleAdsConversion String? @map("google_ads_conversion")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@map("platform_settings")
+}
+
+enum AdminRole {
+  /// Opera a plataforma: vê e gerencia todas as barbearias e usuários
+  PLATAFORMA
+  /// Pessoa de barbearia (dono, gestor ou barbeiro): vê só as barbearias com vínculo
+  BARBEARIA
+}
+
+/// Papel dentro de uma barbearia, por vínculo.
+enum MemberRole {
+  /// Controle total da barbearia: marca, equipe, domínios, publicação, agenda, acessos
+  DONO
+  /// Opera a agenda: confirma presença, marca falta, bloqueia períodos, abre e fecha agendas
+  GESTOR
+  /// Vê a própria agenda e marca presença ou falta dos próprios atendimentos
+  BARBEIRO
+}
+
+enum AdminUserStatus {
+  ATIVO
+  SUSPENSO
+}
+
+/// Quem entra no painel. Senha em scrypt "salt:hash" (ver admin-auth.service).
+model AdminUser {
+  id                 String          @id @default(cuid())
+  email              String          @unique
+  name               String
+  passwordHash       String          @map("password_hash")
+  role               AdminRole       @default(BARBEARIA)
+  memberRole         MemberRole      @default(DONO) @map("member_role")
+  memberBarberId     String?         @map("member_barber_id")
+  status             AdminUserStatus @default(ATIVO)
+  /// Senha temporária: o painel força troca no primeiro acesso
+  mustChangePassword Boolean         @default(false) @map("must_change_password")
+  lastLoginAt        DateTime?       @map("last_login_at")
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+
+  accessTokens AdminAccessToken[]
+  mediaAssets MediaAsset[]
+
+  @@map("admin_users")
+}
+
+enum MediaSource {
+  /// Arquivo enviado pelo painel, guardado no storage da API
+  UPLOAD
+  /// URL externa (ou caminho do app) salva na biblioteca
+  LINK
+}
+
+/// Banco de imagens: uploads e links da instalação.
+model MediaAsset {
+  id          String      @id @default(cuid())
+  name        String
+  /// URL pública final, absoluta para uploads; para links, o que o dono colou
+  url         String
+  /// Caminho relativo no storage (só uploads)
+  storageKey  String?     @map("storage_key")
+  source      MediaSource
+  mime        String?
+  size        Int?
+  width       Int?
+  height      Int?
+  createdById String?     @map("created_by_id")
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  createdBy AdminUser? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@map("media_assets")
+}
+
+/// Config do app do cliente, validado pelo schema de @barber/tenant-config.
+/// Admin edita o rascunho e publica; o app lê só o publicado.
+model AppConfig {
+  id        String   @id @default(cuid())
+  version   Int
+  published Boolean  @default(false)
+  config    Json
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([version])
+  @@index([published])
+  @@map("tenant_configs")
+}
+
+enum LandingEventKind {
+  VISITA
+  CONTATO
+  DEMO
+}
+
+/// Rastreio próprio da landing: visita, clique no WhatsApp e no app modelo, com a origem (UTM e referrer).
+model LandingEvent {
+  id          String           @id @default(cuid())
+  kind        LandingEventKind
+  /// Id gerado no navegador por sessão; uma visita por sessão a cada 24 h
+  sessionId   String           @map("session_id")
+  utmSource   String?          @map("utm_source")
+  utmMedium   String?          @map("utm_medium")
+  utmCampaign String?          @map("utm_campaign")
+  utmTerm     String?          @map("utm_term")
+  utmContent  String?          @map("utm_content")
+  referrer    String?
+  path        String?
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  @@index([createdAt])
+  @@index([kind, sessionId, createdAt])
+  @@map("landing_events")
+}
+
+/* ---------- WhatsApp da barbearia ---------- */
+
+enum WhatsappStatus {
+  /// Nunca conectou ou saiu
+  DESCONECTADO
+  /// Sessão subindo no WAHA
+  CONECTANDO
+  /// Esperando ler o QR ou digitar o código no celular
+  AGUARDANDO_QR
+  CONECTADO
+  /// WAHA não conseguiu manter a sessão; o vigia tenta de novo
+  FALHOU
+}
+
+/// Número de WhatsApp da barbearia, ligado por QR ou código numa sessão do WAHA.
+model WhatsappConnection {
+  id          String         @id @default("singleton")
+  /// Nome da sessão no WAHA
+  session     String         @unique
+  status      WhatsappStatus @default(DESCONECTADO)
+  /// Só dígitos com DDI, preenchido quando conecta
+  phone       String?
+  pushName    String?        @map("push_name")
+  connectedAt DateTime?      @map("connected_at")
+  lastError   String?        @map("last_error")
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  @@map("whatsapp_connections")
+}
+
+enum NotificationEvent {
+  /// Legado: aviso de reserva feita (saiu para poupar o número)
+  AGENDADO
+  /// Legado: aviso de confirmação da barbearia (saiu)
+  CONFIRMADO
+  /// Lembrete antes do horário, pedindo para confirmar a ida
+  LEMBRETE
+  /// Resposta quando o cliente confirma a ida pelo lembrete
+  CLIENTE_CONFIRMOU
+  CANCELADO
+  CONCLUIDO
+  FALTOU
+}
+
+/// Texto e chave de cada aviso. Sem linha, vale o padrão do código.
+model NotificationTemplate {
+  id        String            @id @default(cuid())
+  event     NotificationEvent
+  enabled   Boolean
+  text      String
+  /// Só no lembrete: minutos antes do horário
+  offsetMin Int?              @map("offset_min")
+  updatedAt DateTime          @updatedAt @map("updated_at")
+
+  @@unique([event])
+  @@map("notification_templates")
+}
+
+enum WhatsappMessageStatus {
+  PENDENTE
+  ENVIADO
+  FALHOU
+}
+
+/// Histórico de envios. Um aviso por atendimento e evento (evita duplicar).
+model WhatsappMessage {
+  id            String                @id @default(cuid())
+  appointmentId String?               @map("appointment_id")
+  /// Nulo em mensagem de teste
+  event         NotificationEvent?
+  phone         String
+  text          String
+  status        WhatsappMessageStatus @default(PENDENTE)
+  error         String?
+  createdAt     DateTime              @default(now()) @map("created_at")
+
+  @@unique([appointmentId, event])
+  @@index([createdAt])
+  @@map("whatsapp_messages")
+}
+
+
+/** Link de uso único para o dono criar (ou redefinir) a senha do painel. Guarda só o hash. */
+model AdminAccessToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("admin_access_tokens")
+}
+
+/* ---------- indicação de clientes (da barbearia) ---------- */
+
+enum ReferralStatus {
+  /// Amigo criou a conta; falta o primeiro atendimento
+  PENDENTE
+  /// Amigo foi atendido: quem indicou ganhou
+  CONCLUIDA
+  CANCELADA
+}
+
+/// Cliente que chegou pelo link de indicação de outro cliente.
+model CustomerReferral {
+  id          String         @id @default(cuid())
+  referrerId  String         @map("referrer_id")
+  referredId  String         @unique @map("referred_id")
+  status      ReferralStatus @default(PENDENTE)
+  completedAt DateTime?      @map("completed_at")
+  createdAt   DateTime       @default(now()) @map("created_at")
+
+  referrer Customer @relation("referrer", fields: [referrerId], references: [id], onDelete: Cascade)
+  referred Customer @relation("referred", fields: [referredId], references: [id], onDelete: Cascade)
+  rewards  CustomerReward[]
+
+  @@index([referrerId])
+  @@map("customer_referrals")
+}
+
+enum RewardStatus {
+  DISPONIVEL
+  USADO
+  EXPIRADO
+}
+
+/// Cupom do cliente (hoje, das indicações): desconto % ou R$, ou serviço grátis.
+model CustomerReward {
+  id            String       @id @default(cuid())
+  customerId    String       @map("customer_id")
+  referralId    String?      @map("referral_id")
+  /// INDICOU (quem indicou) ou INDICADO (o amigo)
+  source        String
+  /// desconto_percentual, desconto_valor ou servico_gratis
+  kind          String
+  value         Decimal      @default(0) @db.Decimal(10, 2)
+  serviceId     String?      @map("service_id")
+  /// "20% de desconto", "Corte grátis"
+  label         String
+  status        RewardStatus @default(DISPONIVEL)
+  expiresAt     DateTime?    @map("expires_at")
+  appointmentId String?      @map("appointment_id")
+  usedAt        DateTime?    @map("used_at")
+  createdAt     DateTime     @default(now()) @map("created_at")
+
+  customer Customer          @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  referral CustomerReferral? @relation(fields: [referralId], references: [id], onDelete: SetNull)
+
+  @@index([customerId, status])
+  @@map("customer_rewards")
+}
+

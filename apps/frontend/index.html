@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- resizes-content: no Android o teclado encolhe a página, então dá para rolar até o botão. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0c" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f3efe6" />
+    <meta name="description" content="Encontre os melhores barbeiros e agende seu corte na hora." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Manifest e ícone vêm da barbearia do host (nginx repassa para a API). -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Sua Barbearia" />
+    <meta name="application-name" content="Sua Barbearia" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sua Barbearia</title>
+    <script>
+      // Aplica o tema salvo antes do primeiro paint para não piscar.
+      try {
+        var theme = localStorage.getItem('sua-barbearia:theme')
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme
+        }
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

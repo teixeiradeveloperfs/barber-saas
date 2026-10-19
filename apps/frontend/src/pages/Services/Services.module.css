@@ -1,0 +1,276 @@
+.page {
+  max-width: 960px;
+  margin-inline: auto;
+  padding: max(20px, env(safe-area-inset-top)) var(--gutter) 32px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+/* ---------- busca ---------- */
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search > svg {
+  position: absolute;
+  left: 16px;
+  font-size: 18px;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  appearance: none;
+  transition: border-color 160ms var(--ease-out);
+}
+
+.search input::placeholder {
+  color: var(--text-4);
+}
+
+.search input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.search input:focus-visible {
+  border-color: var(--accent);
+}
+
+/* ---------- grupos ---------- */
+
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.groupHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.groupHint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.list {
+  margin: 0;
+  padding: 4px 16px;
+  list-style: none;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'text meta'
+    'cta cta';
+  align-items: center;
+  gap: 10px 14px;
+  padding: 16px 0;
+}
+
+.row + .row {
+  border-top: 1px solid var(--line);
+}
+
+.text {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.popular {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.popular svg {
+  font-size: 11px;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.duration {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+.cta {
+  grid-area: cta;
+  justify-self: start;
+}
+
+/* ---------- vazio ---------- */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px dashed rgba(var(--text-rgb), 0.16);
+  color: var(--text-3);
+}
+
+.empty > svg {
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.empty p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.empty strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- tablet ---------- */
+
+@media (min-width: 560px) {
+  .head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .search {
+    width: 280px;
+    flex: none;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: 'text meta cta';
+  }
+
+  .cta {
+    justify-self: end;
+  }
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .page {
+    padding: 40px var(--gutter-desktop) 48px;
+  }
+
+  .title {
+    font-size: clamp(36px, 3.4vw, 44px);
+    letter-spacing: -0.02em;
+  }
+
+  .list {
+    padding: 6px 24px;
+  }
+}
+
+/* iPhone amplia a tela ao focar campo com letra menor que 16px. */
+@media (pointer: coarse) {
+  .search input {
+    font-size: 16px;
+  }
+}

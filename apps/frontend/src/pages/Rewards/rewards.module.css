@@ -1,0 +1,581 @@
+.page {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: max(20px, env(safe-area-inset-top)) var(--gutter) 32px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.layout,
+.aside,
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---------- cartões ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.cardHint {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.cardHint strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.subTitle {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.inlineLink {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.inlineLink:hover {
+  color: var(--text);
+}
+
+/* ---------- nível ---------- */
+
+.levelCard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(90% 70% at 100% 0%, rgba(var(--accent-rgb), 0.22), transparent 70%),
+    var(--surface-1);
+}
+
+.levelTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.levelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.levelBadge svg {
+  font-size: 16px;
+}
+
+.streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.streak svg {
+  font-size: 16px;
+  color: var(--danger);
+}
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.balanceValue {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.balanceLabel {
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.levelProgress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(var(--text-rgb), 0.1);
+  overflow: hidden;
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-lo), var(--accent-hi));
+  transition: width 600ms var(--ease-out);
+}
+
+.levelHint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.lifetime {
+  color: var(--text-4);
+}
+
+.perks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.perks li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.perks li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- selos ---------- */
+
+.stamps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stamp {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1.5px dashed rgba(var(--text-rgb), 0.22);
+  border-radius: 50%;
+  color: var(--text-4);
+  font-size: 22px;
+  transition:
+    background-color 240ms var(--ease-out),
+    border-color 240ms var(--ease-out),
+    color 240ms var(--ease-out);
+}
+
+.stamp svg {
+  transform: rotate(-45deg);
+}
+
+.stampOn {
+  border-style: solid;
+  border-color: transparent;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.stampPrize {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+}
+
+.prizeText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stampHint {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.stampHint strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- catálogo ---------- */
+
+.rewardList,
+.voucherList,
+.rules,
+.history,
+.badges {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rewardRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'icon text cost'
+    'icon text action';
+  align-items: center;
+  gap: 4px 14px;
+  padding: 14px 0;
+}
+
+.rewardRow + .rewardRow {
+  border-top: 1px solid var(--line);
+}
+
+.rewardIcon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.rewardText {
+  grid-area: text;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.rewardName {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.rewardDesc {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.rewardCost {
+  grid-area: cost;
+  justify-self: end;
+  font-size: 13px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+.rewardRow > :last-child {
+  grid-area: action;
+  justify-self: end;
+}
+
+.vouchers {
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+}
+
+.voucher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px dashed rgba(var(--accent-rgb), 0.5);
+}
+
+.voucher + .voucher {
+  margin-top: 8px;
+}
+
+.voucherIcon {
+  flex: none;
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.voucherText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.voucherCode {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+/* ---------- regras ---------- */
+
+.rule {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  font-size: 14px;
+}
+
+.rule + .rule {
+  border-top: 1px solid var(--line);
+}
+
+.ruleIcon {
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.ruleLabel {
+  color: var(--text-2);
+}
+
+.rulePoints {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------- conquistas ---------- */
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text-3);
+}
+
+.badgeOn {
+  color: var(--text);
+  background: rgba(var(--accent-rgb), 0.1);
+  border-color: rgba(var(--accent-rgb), 0.35);
+}
+
+.badgeIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(var(--text-rgb), 0.06);
+  color: var(--text-4);
+  font-size: 17px;
+}
+
+.badgeOn .badgeIcon {
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+  color: var(--on-accent);
+}
+
+.badgeName {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.badgeDesc {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.badgeProgress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.miniBar {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(var(--text-rgb), 0.1);
+  overflow: hidden;
+}
+
+.miniBar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+/* ---------- histórico ---------- */
+
+.event {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.event + .event {
+  border-top: 1px solid var(--line);
+}
+
+.eventDate {
+  font-size: 12px;
+  color: var(--text-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.eventLabel {
+  color: var(--text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eventPoints {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--success);
+}
+
+.eventNegative {
+  color: var(--text-3);
+}
+
+/* ---------- tablet ---------- */
+
+@media (min-width: 560px) {
+  .rewardRow {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-areas: 'icon text cost action';
+  }
+
+  .badges {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .page {
+    padding: 40px var(--gutter-desktop) 48px;
+  }
+
+  .head {
+    margin-bottom: 28px;
+  }
+
+  .title {
+    font-size: clamp(36px, 3.4vw, 44px);
+    letter-spacing: -0.02em;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .aside {
+    position: sticky;
+    top: 28px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .stamps {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+
+  .badges {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

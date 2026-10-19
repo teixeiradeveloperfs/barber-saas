@@ -1,0 +1,514 @@
+.booking {
+  --hero-h: min(46dvh, 420px);
+  --bar-h: 92px;
+
+  min-height: 100dvh;
+  padding-bottom: calc(var(--bar-h) + env(safe-area-inset-bottom));
+}
+
+/* ---------- foto ---------- */
+
+.hero {
+  position: relative;
+  height: var(--hero-h);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+}
+
+/* Escurece o topo (botões) e o pé (transição para o sheet). */
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 11, 12, 0.45) 0%,
+    rgba(11, 11, 12, 0) 30%,
+    rgba(11, 11, 12, 0) 60%,
+    rgba(11, 11, 12, 0.55) 100%
+  );
+}
+
+.heroBar {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heroButton {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(243, 238, 227, 0.12);
+  border-radius: 50%;
+  background: rgba(20, 20, 22, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #f3eee3;
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.heroButton:hover {
+  background: rgba(20, 20, 22, 0.7);
+}
+
+.heroButtonOn {
+  color: var(--champagne);
+}
+
+.heroInfo {
+  display: none;
+}
+
+/* ---------- sheet ---------- */
+
+.sheet {
+  position: relative;
+  z-index: 2;
+  margin-top: -28px;
+  padding: 22px var(--gutter) 0;
+  border-radius: 28px 28px 0 0;
+  background: var(--surface-0);
+}
+
+.sheetInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.name {
+  margin: 4px 0 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.meta,
+.metaSpecialties {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.metaSpecialties {
+  color: var(--text-3);
+}
+
+.metaIcon {
+  font-size: 15px;
+  color: var(--accent);
+  transform: rotate(-45deg);
+}
+
+.star {
+  flex: none;
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--text-3);
+}
+
+/* ---------- seções ---------- */
+
+.section {
+  margin-top: 26px;
+}
+
+.sectionTitle {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.card {
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.card .sectionTitle {
+  font-size: 16px;
+}
+
+/* ---------- confirmado ---------- */
+
+.done {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: 32px var(--gutter) 48px;
+}
+
+.doneCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  animation: rise var(--dur) var(--ease-out) both;
+}
+
+.doneIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent);
+  font-size: 26px;
+}
+
+.doneEyebrow {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.doneTitle {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.doneText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+.doneText strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.earn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb), 0.12);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.earn svg {
+  flex: none;
+  font-size: 17px;
+  color: var(--accent);
+}
+
+.earn strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.doneList {
+  width: 100%;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.doneList li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.doneTotal {
+  font-weight: 500;
+}
+
+.doneMuted {
+  color: var(--text-4);
+}
+
+.doneActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .booking {
+    --hero-h: auto;
+
+    display: grid;
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding: 28px var(--gutter-desktop) 40px;
+  }
+
+  .hero {
+    position: sticky;
+    top: 28px;
+    height: auto;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 5;
+    border-radius: 28px;
+  }
+
+  .photo::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 11, 12, 0.35) 0%,
+      rgba(11, 11, 12, 0) 28%,
+      rgba(11, 11, 12, 0.1) 55%,
+      rgba(11, 11, 12, 0.88) 100%
+    );
+  }
+
+  .heroBar {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .heroInfo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 24px;
+    /* Sobre a foto: sempre claro, independente do tema. */
+    --text: #f3eee3;
+    --text-2: rgba(243, 238, 227, 0.8);
+    --text-3: rgba(243, 238, 227, 0.65);
+    --accent: #e2d3a8;
+  }
+
+  .heroInfo .name {
+    font-size: 32px;
+  }
+
+  .sheet {
+    margin-top: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .sheetInfo {
+    display: none;
+  }
+
+  .section:first-of-type {
+    margin-top: 0;
+  }
+
+  .section {
+    margin-top: 28px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .done {
+    padding: 48px var(--gutter-desktop);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sectionHint {
+  margin: -6px 0 12px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.error {
+  /* Fica entre o card "Seus dados" e o resumo: respiro dos dois lados. */
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.code {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.code strong {
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.08em;
+}
+
+@media (min-width: 560px) {
+  .contact {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- recompensa de indicação ---------- */
+
+.rewards {
+  display: grid;
+  gap: 8px;
+}
+
+.reward {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.reward:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rewardActive {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-2));
+}
+
+.rewardIcon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--accent);
+}
+
+.rewardText {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rewardLabel {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.rewardMeta {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.rewardCheck {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+}
+
+.rewardOk,
+.rewardWarn {
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+
+.rewardOk {
+  color: var(--accent);
+}
+
+.rewardWarn {
+  color: var(--text-2);
+}

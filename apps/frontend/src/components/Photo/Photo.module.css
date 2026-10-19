@@ -1,0 +1,33 @@
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  isolation: isolate;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(70% 60% at 75% 20%, rgba(var(--accent-rgb), 0.16), transparent 70%),
+    linear-gradient(160deg, var(--fallback-a) 0%, var(--fallback-b) 100%);
+}
+
+.mark {
+  width: 26%;
+  min-width: 28px;
+  max-width: 64px;
+  height: auto;
+  color: var(--accent);
+  opacity: 0.28;
+  transform: rotate(-45deg);
+}

@@ -1,0 +1,428 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: max(16px, env(safe-area-inset-top)) var(--gutter) max(20px, env(safe-area-inset-bottom));
+  background: var(--surface-0);
+  color: var(--text);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 40px;
+}
+
+.progress {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(var(--text-rgb), 0.16);
+  transition:
+    width 240ms var(--ease-out),
+    background-color 240ms var(--ease-out);
+}
+
+.dotOn {
+  width: 24px;
+  background: var(--accent);
+}
+
+.dotDone {
+  background: rgba(var(--accent-rgb), 0.5);
+}
+
+.skip {
+  border: 0;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.skip:hover {
+  color: var(--text);
+}
+
+/* ---------- cartão do passo ---------- */
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px 0;
+  animation: rise 420ms var(--ease-out) both;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+/* ---------- visuais ---------- */
+
+.visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 200px;
+  padding: 24px;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(80% 70% at 100% 0%, rgba(var(--accent-rgb), 0.16), transparent 70%),
+    var(--surface-1);
+}
+
+.visualHero {
+  font-size: 34px;
+  background:
+    radial-gradient(70% 60% at 30% 100%, rgba(var(--accent-rgb), 0.24), transparent 70%),
+    radial-gradient(80% 70% at 100% 0%, rgba(var(--accent-rgb), 0.16), transparent 70%),
+    var(--surface-1);
+}
+
+.visualHero :global(svg) {
+  font-size: 44px;
+}
+
+.days {
+  display: flex;
+  gap: 8px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 52px;
+  padding: 10px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.day strong {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dayOn {
+  border-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.dayOn strong {
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.slots {
+  display: flex;
+  gap: 8px;
+}
+
+.slot {
+  height: 36px;
+  padding: 0 14px;
+  line-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.slotOn {
+  border-color: transparent;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.stamps {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 8px;
+}
+
+.stamp {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1.5px dashed rgba(var(--text-rgb), 0.22);
+  border-radius: 50%;
+  color: var(--text-4);
+  font-size: 16px;
+}
+
+.stamp svg {
+  transform: rotate(-45deg);
+}
+
+.stampOn {
+  border-style: solid;
+  border-color: transparent;
+  color: var(--on-accent);
+  background: linear-gradient(180deg, var(--accent-hi), var(--accent-lo));
+}
+
+.pointsRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.pointsRow svg {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.credits > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 90px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.credits strong {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.creditsBadge {
+  flex-direction: row !important;
+  gap: 6px !important;
+  min-width: 0 !important;
+  color: var(--success) !important;
+  background: color-mix(in srgb, var(--success) 14%, transparent) !important;
+  font-weight: 500;
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.compareCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+.compareCol strong {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.compareCol small {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.compareLabel {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.compareOn {
+  border-color: rgba(var(--accent-rgb), 0.5);
+  background: rgba(var(--accent-rgb), 0.1);
+}
+
+.compareOn svg {
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.compareOn .compareLabel {
+  color: var(--accent);
+}
+
+.visualInstall {
+  gap: 10px;
+}
+
+.appIcon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  background: #0b0b0c;
+  color: #e2d3a8;
+  font-size: 40px;
+  box-shadow: 0 20px 40px -18px rgba(var(--shadow-rgb), 0.6);
+}
+
+.appIcon svg {
+  transform: rotate(-45deg);
+}
+
+.appLabel {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---------- ações ---------- */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.secondary,
+.back {
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.secondary {
+  color: var(--accent);
+}
+
+.secondary:hover {
+  color: var(--text);
+}
+
+.back {
+  color: var(--text-4);
+}
+
+.back:hover {
+  color: var(--text);
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 900px) {
+  .page {
+    align-items: center;
+    padding: 32px var(--gutter-desktop) 40px;
+  }
+
+  .top,
+  .card,
+  .actions {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .card {
+    flex: 0 0 auto;
+    margin: auto 0;
+    padding: 32px 0;
+  }
+
+  .visual {
+    min-height: 240px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .actions {
+    padding-bottom: 8px;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

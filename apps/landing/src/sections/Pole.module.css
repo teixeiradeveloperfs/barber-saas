@@ -1,0 +1,55 @@
+.pole {
+  display: block;
+  border-radius: 999px;
+  background-image: repeating-linear-gradient(
+    -38deg,
+    var(--pole-a) 0 10px,
+    var(--pole-c) 10px 20px,
+    var(--pole-b) 20px 30px,
+    var(--pole-c) 30px 40px
+  );
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--text-rgb), 0.12),
+    0 20px 40px -24px rgba(var(--shadow-rgb), 0.8);
+}
+
+/* Período do gradiente ao longo de y: 40px / cos(38°). Ao longo de x: 40px / sin(38°). */
+.vertical {
+  width: 16px;
+  height: 100%;
+  min-height: 120px;
+  background-size: 100% calc(100% + 80px);
+  animation: poleY 2.4s linear infinite;
+}
+
+.horizontal {
+  width: 100%;
+  height: 12px;
+  background-size: calc(100% + 100px) 100%;
+  animation: poleX 2.4s linear infinite;
+}
+
+@keyframes poleY {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -50.76px;
+  }
+}
+
+@keyframes poleX {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -64.96px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pole {
+    animation-play-state: paused;
+  }
+}

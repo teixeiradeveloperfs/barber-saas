@@ -1,0 +1,227 @@
+.wrap {
+  min-width: 0;
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card, 20px);
+  background: var(--surface-0);
+  max-height: calc(100dvh - 260px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 56px repeat(var(--cols, 7), minmax(var(--col-min, 132px), 1fr));
+  min-width: calc(56px + var(--cols, 7) * var(--col-min, 132px));
+}
+
+.corner,
+.dayHead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--line);
+}
+
+.corner {
+  left: 0;
+  z-index: 4;
+}
+
+.dayHead {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px 10px;
+  border-left: 1px solid var(--line);
+  font-size: 12px;
+  text-transform: capitalize;
+  color: var(--text-3);
+}
+
+.dayHead strong {
+  font-size: 15px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.headLink {
+  text-decoration: none;
+}
+
+.headLink:hover strong {
+  text-decoration: underline;
+}
+
+.today strong {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.closed span {
+  opacity: 0.6;
+}
+
+.times {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface-0);
+  border-right: 1px solid var(--line);
+}
+
+.hour {
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--text-4);
+  font-variant-numeric: tabular-nums;
+}
+
+/* O primeiro rótulo ficaria metade atrás do cabeçalho fixo. */
+.hourFirst {
+  transform: translateY(2px);
+}
+
+.col {
+  position: relative;
+  border-left: 1px solid var(--line);
+  /* Uma linha a cada 30 min (60px em PX_PER_MIN 2). */
+  background-image: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px 60px);
+}
+
+.colClosed {
+  background-color: rgba(var(--text-rgb), 0.03);
+}
+
+.colClickable {
+  cursor: copy;
+}
+
+.block {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  padding: 4px 6px;
+  background: repeating-linear-gradient(-38deg, rgba(var(--text-rgb), 0.08) 0 6px, transparent 6px 12px);
+  color: var(--text-4);
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.event {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 6px 4px 8px;
+  border: 0;
+  border-left: 3px solid var(--text-4);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: left;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  transition: filter 140ms var(--ease-out);
+}
+
+/* Bloco curto: uma linha só; médio: sem o barbeiro. */
+.xs {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.xs .eventBarber,
+.sm .eventBarber {
+  display: none;
+}
+
+.event:hover {
+  filter: brightness(1.12);
+}
+
+.event:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.eventTime {
+  font-size: 11px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.eventName {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eventBarber {
+  font-size: 11px;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status_CONFIRMADO {
+  border-left-color: var(--accent);
+}
+
+.status_CONCLUIDO {
+  border-left-color: var(--success);
+  opacity: 0.85;
+}
+
+.status_FALTOU {
+  border-left-color: var(--danger);
+  opacity: 0.8;
+}
+
+.status_CANCELADO {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.now {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.now::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}

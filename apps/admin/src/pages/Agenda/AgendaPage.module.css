@@ -1,0 +1,149 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dayNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dateField {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 170px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.dateField input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dayLabel {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.select {
+  height: 36px;
+  padding: 0 32px 0 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-3) 50%), linear-gradient(135deg, var(--text-3) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 15px, calc(100% - 11px) 15px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.summary strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty {
+  margin: 0;
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+.blocks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.blockTime {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.blockWho {
+  color: var(--text-2);
+}
+
+.blockReason {
+  color: var(--text-3);
+  flex: 1;
+}
+
+.hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* iPhone amplia a tela ao focar campo com letra menor que 16px. */
+@media (pointer: coarse) {
+  .select {
+    font-size: 16px;
+  }
+}

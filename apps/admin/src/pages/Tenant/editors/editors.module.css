@@ -1,0 +1,212 @@
+.hours {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hourRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+}
+
+.hourRow > :first-child {
+  flex: 1;
+  min-width: 180px;
+}
+
+.times {
+  display: flex;
+  gap: 10px;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.time input {
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] .time input {
+  color-scheme: light;
+}
+
+.time input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
+}
+
+.time input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.level {
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+}
+
+.docSwitch {
+  margin-bottom: 16px;
+}
+
+.categoryRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+}
+
+.categoryId {
+  align-self: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+@media (min-width: 700px) {
+  .categoryRow {
+    grid-template-columns: 90px minmax(0, 1fr) minmax(0, 1.4fr);
+    align-items: start;
+  }
+}
+
+.sizeField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sizeLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.sizeHint {
+  font-size: 12px;
+  color: var(--text-4);
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  border-radius: 14px;
+  background: rgba(var(--accent-rgb), 0.08);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.notice strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.notice ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.notice a {
+  color: var(--accent);
+}
+
+/* iPhone amplia a tela ao focar campo com letra menor que 16px. */
+@media (pointer: coarse) {
+  .time input {
+    font-size: 16px;
+  }
+}
+
+/* ---------- indicação ---------- */
+
+.note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stat {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-0);
+  border: 1px solid var(--line);
+}
+
+.statValue {
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.referrals {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.referrals li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.referralMeta {
+  font-size: 13px;
+  color: var(--text-3);
+}

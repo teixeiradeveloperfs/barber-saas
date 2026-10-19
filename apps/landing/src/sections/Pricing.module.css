@@ -1,0 +1,157 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.founder {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 460px;
+  padding: 16px 18px;
+  border-left: 2px solid var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  border-radius: 0 14px 14px 0;
+}
+
+.founder strong {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.founder p {
+  font-size: 16px;
+  color: var(--text-2);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgba(var(--accent-rgb), 0.14), transparent 70%),
+    var(--surface-0);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-accent, #141312);
+  background: var(--accent);
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.currency {
+  font-size: 22px;
+  color: var(--text-2);
+}
+
+.amount {
+  font-size: clamp(56px, 8vw, 80px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.period {
+  font-size: 16px;
+  color: var(--text-3);
+}
+
+.note {
+  font-size: 15px;
+  color: var(--text-3);
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.list li {
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.list svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.card :global(.btn) {
+  justify-content: center;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  }
+}
+
+.whatsapp {
+  align-self: center;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.whatsapp:hover {
+  color: var(--accent);
+}
+
+.guarantee {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.guarantee strong {
+  color: var(--text);
+}

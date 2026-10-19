@@ -1,0 +1,56 @@
+.screen {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 480px;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.error h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+.error p {
+  margin: 0;
+  color: var(--text-3);
+}
+
+.error code {
+  font-size: 12px;
+  color: var(--text-4);
+  word-break: break-word;
+}
+
+.mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-hi, #eee3c4), var(--accent-lo, #d8c59a));
+  margin-bottom: 8px;
+}
+
+.retry {
+  margin-top: 8px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent, #e2d3a8);
+  color: var(--on-accent, #141312);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}

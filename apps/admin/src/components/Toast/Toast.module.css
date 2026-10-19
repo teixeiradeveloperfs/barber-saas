@@ -1,0 +1,73 @@
+/* No topo: embaixo fica a barra de salvar/publicar dos editores, e o toast cobria os botões. */
+.stack {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: min(380px, calc(100vw - 32px));
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px -24px rgba(var(--shadow-rgb), 0.6);
+  animation: rise 220ms var(--ease-out) both;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.erro .icon {
+  color: #fff;
+  background: var(--danger);
+}
+
+.info .icon {
+  color: var(--text);
+  background: var(--surface-3);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detail {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

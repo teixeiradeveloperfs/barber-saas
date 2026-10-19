@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Sem conexão · Luxe Cuts</title>
+    <style>
+      html, body { margin: 0; min-height: 100%; background: #0b0b0c; color: #f3eee3; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+      main { min-height: 100dvh; display: grid; place-items: center; padding: 24px; text-align: center; }
+      h1 { font-size: 28px; font-weight: 400; margin: 16px 0 8px; letter-spacing: -0.015em; }
+      p { color: rgba(243, 238, 227, 0.6); margin: 0 0 24px; line-height: 1.5; }
+      button { font: inherit; font-weight: 500; height: 48px; padding: 0 24px; border: 0; border-radius: 14px; color: #141312; background: linear-gradient(180deg, #eee3c4, #d8c59a); cursor: pointer; }
+      svg { color: #e2d3a8; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(-45deg)"><circle cx="5.5" cy="7" r="3"/><circle cx="5.5" cy="17" r="3"/><path d="M7.8 8.7 12 12"/><path d="M21.5 5 7.8 15.3"/><path d="M14.4 13.9 21.5 19"/></svg>
+        <h1>Você está sem conexão.</h1>
+        <p>Assim que a internet voltar, é só tentar de novo.<br />Seus agendamentos continuam salvos.</p>
+        <button type="button" onclick="location.reload()">Tentar de novo</button>
+      </div>
+    </main>
+  </body>
+</html>

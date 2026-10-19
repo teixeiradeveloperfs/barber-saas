@@ -1,0 +1,85 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: var(--radius-card);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+
+.photo {
+  flex: none;
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-inner);
+}
+
+.tier {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 0 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  /* Sobre a foto: sempre escuro com texto claro, em qualquer tema. */
+  color: #f3eee3;
+  background: linear-gradient(to top, rgba(11, 11, 12, 0.85), transparent);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.rating {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.star {
+  flex: none;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.reviews {
+  white-space: nowrap;
+}
+
+/* Em grid de 3 colunas ao lado da sidebar o card fica estreito: compacta. */
+@media (min-width: 900px) {
+  .card {
+    gap: 12px;
+  }
+
+  .photo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .name {
+    font-size: 16px;
+  }
+}

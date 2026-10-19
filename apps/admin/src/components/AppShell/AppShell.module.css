@@ -1,0 +1,338 @@
+.shell {
+  min-height: 100dvh;
+}
+
+/* ---------- topo (só celular) ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 58px;
+  padding: 0 var(--gutter);
+  background: var(--surface-nav);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar .brand {
+  flex: 1;
+}
+
+.iconButton {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 160ms var(--ease-out);
+}
+
+.iconButton:hover {
+  background: var(--surface-1);
+}
+
+.iconButton svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.brand:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.logo {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+
+/* ---------- gaveta / sidebar ---------- */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  border: 0;
+  background: rgba(11, 11, 12, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+
+.rail {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(300px, 86vw);
+  padding: 14px 14px 18px;
+  background: var(--surface-nav);
+  border-right: 1px solid var(--line);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform 260ms var(--ease-out),
+    visibility 0s linear 260ms;
+}
+
+.railOpen {
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+  box-shadow: 0 30px 80px -30px rgba(var(--shadow-rgb), 0.7);
+}
+
+.railHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupTitle {
+  padding: 0 12px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.link svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.link:hover {
+  color: var(--text);
+  background: var(--surface-1);
+}
+
+.active,
+.active:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 6px;
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 160ms var(--ease-out);
+}
+
+.account:hover,
+.accountActive {
+  background: var(--surface-1);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.email {
+  font-size: 12px;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footerActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+/* No celular o tema fica no topo; na gaveta só o sair. */
+.themeDesktop {
+  display: none;
+}
+
+.logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background 160ms var(--ease-out),
+    color 160ms var(--ease-out);
+}
+
+.logout svg {
+  width: 18px;
+  height: 18px;
+}
+
+.logout:hover {
+  color: var(--text);
+  background: var(--surface-1);
+}
+
+.main {
+  min-width: 0;
+}
+
+.content {
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  padding: 24px var(--gutter) 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail {
+    transition: none;
+  }
+}
+
+/* ---------- desktop: sidebar fixa ---------- */
+@media (min-width: 900px) {
+  .shell {
+    display: grid;
+    grid-template-columns: 256px minmax(0, 1fr);
+  }
+
+  .topbar,
+  .scrim,
+  .closeButton {
+    display: none;
+  }
+
+  .rail {
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    width: auto;
+    z-index: auto;
+    transform: none;
+    visibility: visible;
+    box-shadow: none;
+    padding: 22px 16px 18px;
+    gap: 24px;
+  }
+
+  .railHead {
+    padding: 0 8px;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+  .themeDesktop {
+    display: inline-flex;
+  }
+
+  .content {
+    padding: 36px var(--gutter-desktop) 64px;
+  }
+}
+
+/* Selo no item do menu (ex.: "Ganhe" no programa de parceiros). */
+.tag {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--on-accent, #141312);
+  background: var(--accent);
+}

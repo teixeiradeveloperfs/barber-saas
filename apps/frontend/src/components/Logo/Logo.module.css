@@ -1,0 +1,48 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.logoDestaque {
+  font-size: 26px;
+}
+
+/* Altura = base do lugar × ajuste do dono (pequeno/médio/grande). */
+.image {
+  display: block;
+  width: auto;
+  height: calc(var(--logo-base) * var(--logo-scale, 1));
+  max-width: calc(var(--logo-max) * var(--logo-scale, 1));
+  object-fit: contain;
+}
+
+.barra {
+  --logo-base: 28px;
+  --logo-max: 180px;
+}
+
+/* Emblema (quase quadrado): na altura de um logo horizontal ficaria ilegível. */
+.barra.emblem {
+  --logo-base: 56px;
+}
+
+.destaque {
+  --logo-base: 44px;
+  --logo-max: 320px;
+}
+
+.destaque.emblem {
+  --logo-base: 128px;
+}
+
+.mark {
+  font-size: 26px;
+  color: var(--accent);
+  transform: rotate(-45deg);
+}

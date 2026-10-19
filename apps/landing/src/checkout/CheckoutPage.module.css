@@ -1,0 +1,344 @@
+.page {
+  min-height: 100dvh;
+  background:
+    radial-gradient(60% 40% at 90% 0%, rgba(var(--accent-rgb), 0.12), transparent 70%),
+    var(--bg);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: min(1080px, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  padding: 20px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.brand b {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.secure {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  width: min(1080px, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  padding-bottom: 64px;
+}
+
+.summary,
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface-0);
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: start;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.plan {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  color: var(--text-3);
+  font-size: 16px;
+}
+
+.price strong {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-right: 4px;
+}
+
+.founder {
+  font-size: 15px;
+  color: var(--accent);
+}
+
+.included {
+  display: grid;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.included li {
+  display: flex;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+.included svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: var(--accent);
+}
+
+.fine {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+.fine a {
+  color: var(--accent);
+}
+
+.form,
+.pix,
+.done {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.title:not(:first-child) {
+  margin-top: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.field input {
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-1);
+  color: var(--text);
+  font: inherit;
+  /* 16px: o iPhone não amplia a tela ao focar. */
+  font-size: 16px;
+  outline: none;
+  transition: border-color 160ms ease;
+}
+
+.field input:focus {
+  border-color: rgba(var(--accent-rgb), 0.7);
+}
+
+.field input[aria-invalid='true'] {
+  border-color: #f0a58f;
+}
+
+.field em {
+  font-style: normal;
+  font-size: 13px;
+  color: #f0a58f;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.methods {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.method,
+.methodOn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-1);
+  text-align: left;
+  cursor: pointer;
+}
+
+.methodOn {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.method strong,
+.methodOn strong {
+  font-size: 16px;
+}
+
+.method span,
+.methodOn span {
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.note {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+.error {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  color: #f7c9bc;
+  background: rgba(240, 165, 143, 0.12);
+  border: 1px solid rgba(240, 165, 143, 0.35);
+}
+
+.submit {
+  width: 100%;
+}
+
+.qr {
+  align-self: center;
+  width: min(280px, 100%);
+  aspect-ratio: 1;
+  padding: 12px;
+  border-radius: 18px;
+  /* Fundo branco para a câmera do banco ler em qualquer tema. */
+  background: #fff;
+}
+
+.waiting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.done {
+  align-items: flex-start;
+}
+
+.doneIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.14);
+}
+
+.doneIcon svg {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation: none;
+  }
+}
+
+/* Depois de iniciar o pagamento, o QR ou a confirmação vêm primeiro no celular. */
+.ordered .panel {
+  order: -1;
+}
+
+@media (min-width: 640px) {
+  .grid,
+  .methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .summary {
+    position: sticky;
+    top: 24px;
+  }
+
+  .ordered .panel {
+    order: 0;
+  }
+}
+
+.guarantee {
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.guarantee strong {
+  color: var(--text);
+}

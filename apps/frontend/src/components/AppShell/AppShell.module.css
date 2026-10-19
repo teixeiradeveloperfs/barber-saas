@@ -1,0 +1,26 @@
+.shell {
+  min-height: 100dvh;
+  background: var(--surface-0);
+  color: var(--text);
+}
+
+.main {
+  min-width: 0;
+  /* Espaço para a barra inferior não cobrir o fim do conteúdo. */
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+
+.focused {
+  padding-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .shell {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .main {
+    padding-bottom: 0;
+  }
+}

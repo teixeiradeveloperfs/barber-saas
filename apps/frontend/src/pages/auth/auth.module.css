@@ -1,0 +1,259 @@
+/* Peças compartilhadas pelos formulários de autenticação. */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .form {
+    gap: 18px;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.inlineLink {
+  font-size: 14px;
+  color: var(--text-3);
+  transition: color 160ms var(--ease-out);
+}
+
+.inlineLink:hover {
+  color: var(--accent);
+}
+
+.submit {
+  margin-top: 6px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 8px 0;
+  font-size: 13px;
+  color: var(--text-4);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.social svg {
+  font-size: 20px;
+}
+
+/* ---------- estado de sucesso ---------- */
+
+.success {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: fade 360ms var(--ease-out) both;
+}
+
+.successIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent);
+  font-size: 26px;
+}
+
+.successText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+.successText strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.successActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- código por WhatsApp/SMS ---------- */
+
+.otpIntro {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.otpIntro strong {
+  color: var(--text);
+}
+
+.codeInput {
+  width: 100%;
+  height: 64px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+
+.codeInput:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
+}
+
+.codeError {
+  margin: -6px 0 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.otpActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.linkButton:disabled {
+  color: var(--text-4);
+  text-decoration: none;
+  cursor: default;
+}
+
+.channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.channel:hover {
+  border-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.channelOn {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.25);
+}
+
+.channel strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.channel span {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.devHint {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text-2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px dashed rgba(var(--accent-rgb), 0.5);
+}
+
+.devHint code {
+  font-size: 15px;
+  letter-spacing: 0.2em;
+  color: var(--text);
+}
+
+.formError {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--text-4);
+}
+
+.invite {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+}
+
+.invite strong {
+  color: var(--text);
+}
