@@ -10,8 +10,8 @@ As telas principais em formato mobile:
 
 <p align="center">
   <img src="docs/screenshots/client-home.png" alt="Tela inicial do cliente" width="220">
-  <img src="docs/screenshots/client-login.png" alt="Tela de login do cliente" width="220">
-  <img src="docs/screenshots/admin.png" alt="Tela de login do painel administrativo" width="220">
+  <img src="docs/screenshots/client-authenticated.png" alt="Cliente autenticado escolhendo um barbeiro" width="220">
+  <img src="docs/screenshots/admin-authenticated.png" alt="Painel administrativo autenticado" width="220">
   <img src="docs/screenshots/landing.png" alt="Landing page da Sua Barbearia" width="220">
 </p>
 
