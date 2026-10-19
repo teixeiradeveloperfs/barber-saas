@@ -6,13 +6,16 @@ O projeto foi preparado para uso em curso e não possui fluxo de criação ou is
 
 ## Prévia
 
-Tela inicial do aplicativo do cliente em formato mobile:
+As telas principais em formato mobile:
 
 <p align="center">
-  <img src="docs/screenshots/client-home.png" alt="Tela inicial do Sua Barbearia em formato celular" width="320">
+  <img src="docs/screenshots/client-home.png" alt="Tela inicial do cliente" width="220">
+  <img src="docs/screenshots/client-login.png" alt="Tela de login do cliente" width="220">
+  <img src="docs/screenshots/admin.png" alt="Tela de login do painel administrativo" width="220">
+  <img src="docs/screenshots/landing.png" alt="Landing page da Sua Barbearia" width="220">
 </p>
 
-O aplicativo foi pensado para funcionar bem no celular, onde o cliente realiza o agendamento. As telas administrativas ficam disponíveis em uma aplicação separada para a equipe da barbearia.
+O cliente realiza o agendamento pelo celular, enquanto a equipe usa o painel administrativo separado. A landing page apresenta o produto para a barbearia.
 
 ## Visão geral
 
